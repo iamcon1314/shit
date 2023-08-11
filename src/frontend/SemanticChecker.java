@@ -17,23 +17,23 @@ public class SemanticChecker implements ASTVisitor, SomethingExisting {
   private Scope nowScope;
   private int level = 0;
   public  int depth=0;
- public HashMap<String, Integer>ClassBuilt=new HashMap<>();
+  public HashMap<String, Integer>ClassBuilt=new HashMap<>();
 
- public boolean LeftInt(ExprNode expression){
-   if ((expression.isLeftValue() && expression.type.equals(Int))) {
+  public boolean LeftInt(ExprNode expression){
+    if ((expression.isLeftValue() && expression.type.equals(Int))) {
 //     throw new BaseError(expression.pos, "Left Value SHIT AWAAAAA！！！！！！！FUCK");
-     return false;
-   }
-   return true;
- }
- public boolean ifBuiltMuity(String name){
-   if(ClassBuilt.containsKey(name)) {
-     return true;
-   }
-   else{
-     return false;
-   }
- }
+      return false;
+    }
+    return true;
+  }
+  public boolean ifBuiltMuity(String name){
+    if(ClassBuilt.containsKey(name)) {
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
   public SemanticChecker(GlobalScope globalScope) {
     this.globalScope = globalScope;
     nowScope = globalScope;
@@ -134,7 +134,7 @@ public class SemanticChecker implements ASTVisitor, SomethingExisting {
 //        throw new BaseError(node.classBuild.pos, node.name+"Class Name Does Not Match Its CONSTURCT FUCKYOU!!!!!!!!!");
 //      }
 //    }
-        if (node.classBuild != null) {
+    if (node.classBuild != null) {
       if (node.name.equals(node.classBuild.name)) {
         node.classBuild.accept(this);
       }
@@ -209,7 +209,7 @@ public class SemanticChecker implements ASTVisitor, SomethingExisting {
   public void visit(SuiteNode node) {
     nowScope = new Scope(nowScope);
 //    try {
-      node.stmtnodes.forEach(stmt -> stmt.accept(this));
+    node.stmtnodes.forEach(stmt -> stmt.accept(this));
 
     nowScope = nowScope.parentScope;
   }
@@ -251,7 +251,7 @@ public class SemanticChecker implements ASTVisitor, SomethingExisting {
   public void visit(ForStmtNode node) {
     nowScope = new Scope(nowScope);
     nowScope.inLoop=true
-            ;
+    ;
     if (node.varDef != null) {
       node.varDef.accept(this);
     }
@@ -297,7 +297,7 @@ public class SemanticChecker implements ASTVisitor, SomethingExisting {
           node.value.accept(this);
           if (Auto.equals(tmpSCOPE.returnType)) {
 
-              tmpSCOPE.returnType = node.value.type;
+            tmpSCOPE.returnType = node.value.type;
 
           } else if (!tmpSCOPE.returnType.equals(node.value.type)
                   && (!tmpSCOPE.returnType.isReferenceType() || !Null.equals(node.value.type))) {
@@ -347,6 +347,61 @@ public class SemanticChecker implements ASTVisitor, SomethingExisting {
     // System.out.println(node.type.typeName);
   }
 
+//  public void visit(BinaryExprNode node) {
+//    node.lhs.accept(this);
+//    node.rhs.accept(this);
+//    if (node.lhs.type == null || node.rhs.type == null)
+//      throw new BaseError(node.pos, "invalid 1expression");
+//    // 两个 null 不一样
+//    if (Null.equals(node.lhs.type) || Null.equals(node.rhs.type)) {
+//      // maybe an object compare with null
+//      if ((node.op.equals("==") || node.op.equals("!="))
+//              && (node.lhs.type.isReferenceType() || node.rhs.type.isReferenceType())) {
+//        node.type = Bool;
+//        return;
+//      } else if (!node.lhs.type.equals(node.rhs.type)) {
+//        throw new BaseError(node.pos, "invalid2expression");
+//      }
+//    }
+//    if (Void.equals(node.lhs.type) || Void.equals(node.rhs.type))
+//      throw new BaseError(node.pos, "invalid e4xpression");
+//    if (!node.lhs.type.equals(node.rhs.type))
+//      throw new BaseError(node.pos, "Type mismatch");
+//    switch (node.op) {
+//      case "+":
+//      case "<=":
+//      case ">=":
+//      case "<":
+//      case ">":
+//        if (!node.lhs.type.equals(Int) && !node.lhs.type.equals(String))
+//          throw new BaseError(node.pos, "Type mismatch");
+//        node.type = node.op.equals("+") ? new Type(node.lhs.type) : Bool;
+//        break;
+//      case "*":
+//      case "/":
+//      case "%":
+//      case "-":
+//      case ">>":
+//      case "<<":
+//      case "&":
+//      case "^":
+//      case "|":
+//        if (!node.lhs.type.equals(Int))
+//          throw new BaseError(node.pos, "Type mismatch");
+//        node.type = Int;
+//        break;
+//      case "&&":
+//      case "||":
+//        if (!node.lhs.type.equals(Bool))
+//          throw new BaseError(node.pos, "Type mismatch");
+//        node.type = Bool;
+//        break;
+//      default:
+//        node.type = Bool;
+//    }
+//  }
+
+  //  *************
   public void visit(BinaryExprNode node) {
     node.lhs.accept(this);
     node.rhs.accept(this);
@@ -412,6 +467,9 @@ public class SemanticChecker implements ASTVisitor, SomethingExisting {
     node.type = Bool;
     return;
   }
+
+
+//  ************
 //下面是错误代码
 //  public void visit(UnaryExprNode node) {
 //    node.expr.accept(this);
@@ -498,7 +556,7 @@ public class SemanticChecker implements ASTVisitor, SomethingExisting {
   }
 
 
-//public void visit(PreAddExprNode node) {
+  //public void visit(PreAddExprNode node) {
 //    validateExpression(node.expr);
 //
 //    setTypeAndCheckLeftValue(node);
@@ -662,7 +720,7 @@ public class SemanticChecker implements ASTVisitor, SomethingExisting {
 //  }
 //}
 
-//  public void visit(NewExprNode node) {
+  //  public void visit(NewExprNode node) {
 //    for (var size : node.sizeList) {
 //      size.accept(this);
 //      if ( !size.type.equals(Int)) {
@@ -690,7 +748,27 @@ public class SemanticChecker implements ASTVisitor, SomethingExisting {
 
 
   public void visit(TriExprNode node) {
-
+    node.cond.accept(this);
+    node.lhs.accept(this);
+    node.rhs.accept(this);
+    if (!Bool.equals(node.cond.type))
+      throw new BaseError(node.pos, "SHIT !!!!Invalid Condition expression");
+    if (!node.lhs.type.equals(node.rhs.type)){//type不一样
+      if(!Null.equals(node.lhs.type) && !Null.equals(node.rhs.type)){
+        throw new BaseError(node.pos, "Invalid Expression SHIT!!!!!!!!!!!");
+      }
+      else{
+        if(Null.equals(node.lhs.type)){
+          node.type = node.rhs.type;
+        }
+        else{
+          node.type = node.lhs.type;
+        }
+      }
+    }
+    else{
+      node.type = node.rhs.type;
+    }
   }
 
   public void visit(ExprListNode node) {
