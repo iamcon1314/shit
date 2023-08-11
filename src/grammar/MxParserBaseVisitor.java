@@ -1,4 +1,4 @@
-
+// Generated from C:/Users/Â½Åôî£/IdeaProjects/myCompiler/src/grammar\MxParser.g4 by ANTLR 4.12.0
  package src.grammar; 
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 

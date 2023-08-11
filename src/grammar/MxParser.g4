@@ -69,7 +69,7 @@ expression
   | expression op=BOr expression                                  #binaryExpr
   | expression op=LAnd expression                                 #binaryExpr
   | expression op=LOr expression                                  #binaryExpr
-  | expression op1=Questionmark expression op2=Colon expression           #triExpr
+  | <assoc=right> expression op1=Questionmark expression op2=Colon expression           #triExpr
   | <assoc=right> expression op=Assign expression                 #assignExpr
   | primary                                           #atomExpr
   ;

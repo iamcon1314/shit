@@ -1,4 +1,5 @@
-package src.grammar;
+// Generated from C:/Users/Â½Åôî£/IdeaProjects/myCompiler/src/grammar\MxParser.g4 by ANTLR 4.12.0
+ package src.grammar; 
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -2233,7 +2234,7 @@ public class MxParser extends Parser {
 						setState(261);
 						((TriExprContext)_localctx).op2 = match(Colon);
 						setState(262);
-						expression(4);
+						expression(3);
 						}
 						break;
 					case 12:
@@ -2736,7 +2737,7 @@ public class MxParser extends Parser {
 		"\u0100\n\u0004\u0000\u0000\u0100\u0101\u0005\r\u0000\u0000\u0101\u011c"+
 		"\u0003*\u0015\u0005\u0102\u0103\n\u0003\u0000\u0000\u0103\u0104\u0005"+
 		"!\u0000\u0000\u0104\u0105\u0003*\u0015\u0000\u0105\u0106\u0005\"\u0000"+
-		"\u0000\u0106\u0107\u0003*\u0015\u0004\u0107\u011c\u0001\u0000\u0000\u0000"+
+		"\u0000\u0106\u0107\u0003*\u0015\u0003\u0107\u011c\u0001\u0000\u0000\u0000"+
 		"\u0108\u0109\n\u0002\u0000\u0000\u0109\u010a\u0005\u0015\u0000\u0000\u010a"+
 		"\u011c\u0003*\u0015\u0002\u010b\u010c\n\u0013\u0000\u0000\u010c\u010d"+
 		"\u0005\u0018\u0000\u0000\u010d\u011c\u00056\u0000\u0000\u010e\u010f\n"+
