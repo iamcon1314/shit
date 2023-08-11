@@ -1,5 +1,4 @@
-// Generated from C:/Users/Â½Åôî£/IdeaProjects/myCompiler/src/grammar\MxLexer.g4 by ANTLR 4.12.0
- package src.grammar; 
+package src.grammar;
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.Token;

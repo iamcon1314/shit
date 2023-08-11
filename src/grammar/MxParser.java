@@ -1,5 +1,4 @@
-// Generated from C:/Users/Â½Åôî£/IdeaProjects/myCompiler/src/grammar\MxParser.g4 by ANTLR 4.12.0
- package src.grammar; 
+package src.grammar;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
