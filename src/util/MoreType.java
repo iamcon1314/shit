@@ -2,7 +2,7 @@ package src.util;
 
 import src.ast.othernode.Type;
 
-import static src.util.SomethingExisting.Int;
+import static src.util.SomethingExisting.IntOPr;
 
 public class MoreType {
     public String op;

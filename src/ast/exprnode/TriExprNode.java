@@ -14,8 +14,9 @@ public class TriExprNode extends ExprNode {
     public ExprNode rhs;
     public TriExprNode(Position pos, ExprNode cond, ExprNode lhs, ExprNode rhs) {
         super(pos);
-        this.lhs = lhs;
         this.cond = cond;
+        this.lhs = lhs;
+
         this.rhs = rhs;
         this.isLeftValue=false;
     }

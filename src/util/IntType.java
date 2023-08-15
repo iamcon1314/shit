@@ -19,7 +19,7 @@ public class IntType {
                         op.equals("^")||
                         op.equals("|")
                 ){
-                        optype=Int;
+                        optype=IntOPr;
                 }
         }
 

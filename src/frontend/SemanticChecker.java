@@ -17,23 +17,23 @@ public class SemanticChecker implements ASTVisitor, SomethingExisting {
   private Scope nowScope;
   private int level = 0;
   public  int depth=0;
-  public HashMap<String, Integer>ClassBuilt=new HashMap<>();
+ public HashMap<String, Integer>ClassBuilt=new HashMap<>();
 
-  public boolean LeftInt(ExprNode expression){
-    if ((expression.isLeftValue() && expression.type.equals(Int))) {
+ public boolean LeftInt(ExprNode expression){
+   if ((expression.isLeftValue() && expression.type.equals(IntOPr))) {
 //     throw new BaseError(expression.pos, "Left Value SHIT AWAAAAA！！！！！！！FUCK");
-      return false;
-    }
-    return true;
-  }
-  public boolean ifBuiltMuity(String name){
-    if(ClassBuilt.containsKey(name)) {
-      return true;
-    }
-    else{
-      return false;
-    }
-  }
+     return false;
+   }
+   return true;
+ }
+ public boolean ifBuiltMuity(String name){
+   if(ClassBuilt.containsKey(name)) {
+     return true;
+   }
+   else{
+     return false;
+   }
+ }
   public SemanticChecker(GlobalScope globalScope) {
     this.globalScope = globalScope;
     nowScope = globalScope;
@@ -94,7 +94,6 @@ public class SemanticChecker implements ASTVisitor, SomethingExisting {
     Scope tmpscope=new Scope(nowScope,node.returnType.type);
     nowScope=tmpscope;
     if(node.params==null){
-
       //throw new BaseError(node.pos, "src.Main Always MUST NOT HAVE Params !!! SHIT YOUR SHIT !!!!!!!!!!");
     }
     else{
@@ -102,7 +101,7 @@ public class SemanticChecker implements ASTVisitor, SomethingExisting {
     }
     node.stmtnodes.forEach(stmt -> stmt.accept(this));
     //Void
-    if(Void.equals(node.returnType.type)){
+    if(VoidOPr.equals(node.returnType.type)){
 //      if(nowScope.isReturned==true){
 //        throw new BaseError(node.pos, "Function Void " + node.name + " should have return statement");
 //      }
@@ -134,7 +133,7 @@ public class SemanticChecker implements ASTVisitor, SomethingExisting {
 //        throw new BaseError(node.classBuild.pos, node.name+"Class Name Does Not Match Its CONSTURCT FUCKYOU!!!!!!!!!");
 //      }
 //    }
-    if (node.classBuild != null) {
+        if (node.classBuild != null) {
       if (node.name.equals(node.classBuild.name)) {
         node.classBuild.accept(this);
       }
@@ -196,7 +195,7 @@ public class SemanticChecker implements ASTVisitor, SomethingExisting {
 
 
   public void visit(ClassBuildNode node) {
-    nowScope = new Scope(nowScope, Void);
+    nowScope = new Scope(nowScope, VoidOPr);
     if(ifBuiltMuity(node.name)){
       throw new BaseError(node.pos, "Multiple Constructors FUCKING YOU!!!!!!!!!");
     }
@@ -209,14 +208,14 @@ public class SemanticChecker implements ASTVisitor, SomethingExisting {
   public void visit(SuiteNode node) {
     nowScope = new Scope(nowScope);
 //    try {
-    node.stmtnodes.forEach(stmt -> stmt.accept(this));
+      node.stmtnodes.forEach(stmt -> stmt.accept(this));
 
     nowScope = nowScope.parentScope;
   }
 
   public void visit(IfStmtNode node) {
     node.condition.accept(this);
-    if (!Bool.equals(node.condition.type)) {
+    if (!BoolOPr.equals(node.condition.type)) {
       throw new BaseError(node.pos, "IF CONDITION MUST BE BOOL!!!!!!!!!!SHIT!!!!");
     }
     nowScope = new Scope(nowScope);
@@ -236,7 +235,7 @@ public class SemanticChecker implements ASTVisitor, SomethingExisting {
 
   public void visit(WhileStmtNode node) {
     node.condition.accept(this);
-    if (!Bool.equals(node.condition.type)) {
+    if (!BoolOPr.equals(node.condition.type)) {
       throw new BaseError(node.pos, "WHILE CONDITION MUST BE BOOL!!!!!!!!!!SHIT!!!!");
     }
     nowScope = new Scope(nowScope);
@@ -251,7 +250,7 @@ public class SemanticChecker implements ASTVisitor, SomethingExisting {
   public void visit(ForStmtNode node) {
     nowScope = new Scope(nowScope);
     nowScope.inLoop=true
-    ;
+            ;
     if (node.varDef != null) {
       node.varDef.accept(this);
     }
@@ -260,7 +259,7 @@ public class SemanticChecker implements ASTVisitor, SomethingExisting {
     }
     if (node.condition != null) {
       node.condition.accept(this);
-      if (!Bool.equals(node.condition.type)) {
+      if (!BoolOPr.equals(node.condition.type)) {
         throw new BaseError(node.pos, "FOR CONDITION MUST BE BOOL!!!!!!!!!!SHIT!!!!");
       }
     }
@@ -290,17 +289,17 @@ public class SemanticChecker implements ASTVisitor, SomethingExisting {
       }
       else {
         if (node.value == null) {
-          if (!tmpSCOPE.returnType.equals(Void)) {
+          if (!tmpSCOPE.returnType.equals(VoidOPr)) {
             throw new BaseError(node.pos, "RETURN TYPE WRONG !!!!!!!!!!!!! FUCK !");
           }
         } else {
           node.value.accept(this);
-          if (Auto.equals(tmpSCOPE.returnType)) {
+          if (AutoOPr.equals(tmpSCOPE.returnType)) {
 
-            tmpSCOPE.returnType = node.value.type;
+              tmpSCOPE.returnType = node.value.type;
 
           } else if (!tmpSCOPE.returnType.equals(node.value.type)
-                  && (!tmpSCOPE.returnType.isReferenceType() || !Null.equals(node.value.type))) {
+                  && (!tmpSCOPE.returnType.isReferenceType() || !NullOPr.equals(node.value.type))) {
             throw new BaseError(node.pos, "RETURN TYPE WRONG !!!!!!!!!!!!! FUCK !");
           }
         }
@@ -320,17 +319,17 @@ public class SemanticChecker implements ASTVisitor, SomethingExisting {
 
   public void visit(AtomExprNode node) {
     if (node.str.equals("null")) {
-      node.type = Null;
+      node.type = NullOPr;
     } else if (node.str.equals("true") || node.str.equals("false")) {
-      node.type = Bool;
+      node.type = BoolOPr;
     } else if (node.str.matches("\".*\"")) {
-      node.type = String;
+      node.type = StringOPr;
     } else if (node.str.equals("this")) {
       if (nowScope. nowclass == null)
         throw new BaseError(node.pos, "ITS NOT IN CLASS FUCKING CRAZY!!!!");
       node.type = new Type(nowScope. nowclass.name);
     } else {
-      node.type = Int;
+      node.type = IntOPr;
     }
     // System.out.println(node.type.typeName);
 //    throw new BaseError(node.pos, "NO TYPE!!!!!!!!!!!!");
@@ -401,23 +400,23 @@ public class SemanticChecker implements ASTVisitor, SomethingExisting {
 //    }
 //  }
 
-  //  *************
+//  *************
   public void visit(BinaryExprNode node) {
     node.lhs.accept(this);
     node.rhs.accept(this);
     //没有类型
-    if (node.lhs.type == null || node.rhs.type == null || Void.equals(node.lhs.type) || Void.equals(node.rhs.type)) {
+    if (node.lhs.type == null || node.rhs.type == null || VoidOPr.equals(node.lhs.type) || VoidOPr.equals(node.rhs.type)) {
       throw new BaseError(node.pos, "BinaryExprNode CONtains NULL (VOID)!!!!!!!!!!SHIT!!!!!!!");
     }
-    if (!(Null.equals(node.lhs.type) || Null.equals(node.rhs.type)) && !node.lhs.type.equals(node.rhs.type)) {
+    if (!(NullOPr.equals(node.lhs.type) || NullOPr.equals(node.rhs.type)) && !node.lhs.type.equals(node.rhs.type)) {
       throw new BaseError(node.pos, "Type WAAAAAAAAAA!!!!!!!!");
     }
     // 两个 null 不一样
-    if (Null.equals(node.lhs.type) || Null.equals(node.rhs.type)) {
+    if (NullOPr.equals(node.lhs.type) || NullOPr.equals(node.rhs.type)) {
       // maybe an object compare with null
       if ((node.op.equals("==") || node.op.equals("!="))
               && (node.lhs.type.isReferenceType() || node.rhs.type.isReferenceType())) {
-        node.type = Bool;
+        node.type = BoolOPr;
         return;
       } else if (!node.lhs.type.equals(node.rhs.type)) {
         throw new BaseError(node.pos, "CANOT JUDGE SHIT!!!!!!!!!!!!!!!");
@@ -427,8 +426,8 @@ public class SemanticChecker implements ASTVisitor, SomethingExisting {
 //      throw new BaseError(node.pos, "invalid expression");
 //    }
     IntType ifINT = new IntType(node.op);
-    if (ifINT.optype == Int) {
-      if (node.lhs.type.equals(Int) == false) {
+    if (ifINT.optype == IntOPr) {
+      if (node.lhs.type.equals(IntOPr) == false) {
         throw new BaseError(node.pos, "Type Canot Match SHIT!!!!!!!!!!!!");
       }
 //        if(node.rhs.str=="0"){
@@ -436,35 +435,35 @@ public class SemanticChecker implements ASTVisitor, SomethingExisting {
 //            throw new
 //          }
 //        }
-      node.type = Int;
+      node.type = IntOPr;
       return;
     }
     MoreType ifMORE = new MoreType(node.op);
     if (ifMORE.optype == "MoreType") {
-      if (!(node.lhs.type.equals(Int) || node.lhs.type.equals(String)) || !(node.rhs.type.equals(Int) || node.rhs.type.equals(String))) {
+      if (!(node.lhs.type.equals(IntOPr) || node.lhs.type.equals(StringOPr)) || !(node.rhs.type.equals(IntOPr) || node.rhs.type.equals(StringOPr))) {
         throw new BaseError(node.pos, "Type Canot Match SHIT!!!!!!!!!!!!");
       } else {
-        if ((node.lhs.type.equals(Int) && node.rhs.type.equals(String)) || (node.rhs.type.equals(Int) && node.lhs.type.equals(String))) {
+        if ((node.lhs.type.equals(IntOPr) && node.rhs.type.equals(StringOPr)) || (node.rhs.type.equals(IntOPr) && node.lhs.type.equals(StringOPr))) {
           throw new BaseError(node.pos, "Type Canot Match LEFT and RIGHT SHIT!!!!!!!!!!!!");
         }
 //          node.type = node.op.equals("+") ? new Type(node.lhs.type) : Bool;
         if (node.op.equals("+")) {
           node.type = node.lhs.type;
         } else {
-          node.type = Bool;
+          node.type = BoolOPr;
         }
 
       }
       return;
     }
     BoolType ifBOOL = new BoolType(node.op);
-    if (ifBOOL.optype == Bool) {
-      if (!node.lhs.type.equals(Bool))
+    if (ifBOOL.optype == BoolOPr) {
+      if (!node.lhs.type.equals(BoolOPr))
         throw new BaseError(node.pos, "Type mismatch");
-      node.type = Bool;
+      node.type = BoolOPr;
       return;
     }
-    node.type = Bool;
+    node.type = BoolOPr;
     return;
   }
 
@@ -513,13 +512,13 @@ public class SemanticChecker implements ASTVisitor, SomethingExisting {
         break;
       }
       case "!": {
-        if (!expr.type.equals(Bool)) {
+        if (!expr.type.equals(BoolOPr)) {
           throw new BaseError(expr.pos, "BOLL NEEDED FUCK!!!!!!!!!!!");
         }
         break;
       }
       default:
-        if (!expr.type.equals(Int)) {
+        if (!expr.type.equals(IntOPr)) {
           throw new BaseError(expr.pos, "INTTT NEEDED FUCK!!!!!!!!!!!");
         }
         break;
@@ -530,15 +529,15 @@ public class SemanticChecker implements ASTVisitor, SomethingExisting {
     switch (op) {
       case "++":
       case "--": {
-        node.type = new Type(Int);
+        node.type = new Type(IntOPr);
         break;
       }
       case "!": {
-        node.type = new Type(Bool);
+        node.type = new Type(BoolOPr);
         break;
       }
       default: {
-        node.type = new Type(Int);
+        node.type = new Type(IntOPr);
         break;
       }
     }
@@ -552,11 +551,11 @@ public class SemanticChecker implements ASTVisitor, SomethingExisting {
     if (LeftInt(node.expr)) {
       throw new BaseError(node.pos, "Left Value SHIT AWAAAAA！！！！！！！FUCK");
     }
-    node.type = new Type(Int);
+    node.type = new Type(IntOPr);
   }
 
 
-  //public void visit(PreAddExprNode node) {
+//public void visit(PreAddExprNode node) {
 //    validateExpression(node.expr);
 //
 //    setTypeAndCheckLeftValue(node);
@@ -583,10 +582,10 @@ public class SemanticChecker implements ASTVisitor, SomethingExisting {
     if (node.lhs.type == null || node.rhs.type == null) {
       throw new BaseError(node.pos, "YOUR TYPE WHERE??????????");
     }
-    if (Void.equals(node.lhs.type) || Void.equals(node.rhs.type)) {
+    if (VoidOPr.equals(node.lhs.type) || VoidOPr.equals(node.rhs.type)) {
       throw new BaseError(node.pos, "YOUR TYPE SERIOUS??????????");
     }
-    if (!node.lhs.type.equals(node.rhs.type) && (!node.lhs.type.isReferenceType() || !Null.equals(node.rhs.type))) {
+    if (!node.lhs.type.equals(node.rhs.type) && (!node.lhs.type.isReferenceType() || !NullOPr.equals(node.rhs.type))) {
       throw new BaseError(node.pos, "Type Mismatch YOU !!!!!!!!!!!FUCK!!!!!!!!");
     }
     node.type = new Type(node.lhs.type);
@@ -609,7 +608,7 @@ public class SemanticChecker implements ASTVisitor, SomethingExisting {
       for (int i = 0; i < funcDef.params.units.size(); i++) {
         var param = funcDef.params.units.get(i);
         var arg = node.args.exprnodes.get(i);
-        if (!param.type.type.equals(arg.type) && (!param.type.type.isReferenceType() || !Null.equals(arg.type))) {
+        if (!param.type.type.equals(arg.type) && (!param.type.type.isReferenceType() || !NullOPr.equals(arg.type))) {
           throw new BaseError(node.pos, "Parameter Type WAAAAAAAAA!");
         }
       }
@@ -628,7 +627,7 @@ public class SemanticChecker implements ASTVisitor, SomethingExisting {
     if(node.index.type == null){
       throw new BaseError(node.pos, "YOUR INDEX WHERE!!!!!?????????????");
     }
-    if(!node.index.type.equals(Int)){
+    if(!node.index.type.equals(IntOPr)){
       throw new BaseError(node.pos, "YOUR INDEX NOT INT!!!!!!!!!!!!!!!!!");
     }
     if (node.array.type == null) {
@@ -643,11 +642,11 @@ public class SemanticChecker implements ASTVisitor, SomethingExisting {
 
   public void visit(MemberExprNode node) {
     node.obj.accept(this);
-    if (node.obj.type==null||(!node.obj.type.isReferenceType() && !node.obj.type.equals(This) && !node.obj.type.equals(String)) ){
+    if (node.obj.type==null||(!node.obj.type.isReferenceType() && !node.obj.type.equals(ThisOPr) && !node.obj.type.equals(StringOPr)) ){
       throw new BaseError(node.pos, "CLASS Type FUCKING WRONG!!!!!!!!!");
     }
     ClassDefNode classDef;
-    if(This.equals(node.obj.type)){
+    if(ThisOPr.equals(node.obj.type)){
       classDef=nowScope. nowclass;
     }
     else{
@@ -720,7 +719,7 @@ public class SemanticChecker implements ASTVisitor, SomethingExisting {
 //  }
 //}
 
-  //  public void visit(NewExprNode node) {
+//  public void visit(NewExprNode node) {
 //    for (var size : node.sizeList) {
 //      size.accept(this);
 //      if ( !size.type.equals(Int)) {
@@ -735,7 +734,7 @@ public class SemanticChecker implements ASTVisitor, SomethingExisting {
     for (int i = 0; i < node.sizeList.size(); i++) {
       var tmp = node.sizeList.get(i);
       tmp.accept(this);
-      if (tmp.type == null || !tmp.type.equals(Int)) {
+      if (tmp.type == null || !tmp.type.equals(IntOPr)) {
         throw new BaseError(node.pos, "NEW SHIT YOU!!!!!!!!!!!");
       }
     }
@@ -751,14 +750,14 @@ public class SemanticChecker implements ASTVisitor, SomethingExisting {
     node.cond.accept(this);
     node.lhs.accept(this);
     node.rhs.accept(this);
-    if (!Bool.equals(node.cond.type))
-      throw new BaseError(node.pos, "SHIT !!!!Invalid Condition expression");
+    if (!BoolOPr.equals(node.cond.type))
+      throw new BaseError(node.pos, "SHIT !!!!In132131231313213123valid Condition expression");
     if (!node.lhs.type.equals(node.rhs.type)){//type不一样
-      if(!Null.equals(node.lhs.type) && !Null.equals(node.rhs.type)){
-        throw new BaseError(node.pos, "Invalid Expression SHIT!!!!!!!!!!!");
+      if(!VoidOPr.equals(node.lhs.type) && !VoidOPr.equals(node.rhs.type)){
+        throw new BaseError(node.pos, "Invalid Expression SHIT13123!!!!!!!!!!!");
       }
       else{
-        if(Null.equals(node.lhs.type)){
+        if(NullOPr.equals(node.lhs.type)){
           node.type = node.rhs.type;
         }
         else{
@@ -767,7 +766,7 @@ public class SemanticChecker implements ASTVisitor, SomethingExisting {
       }
     }
     else{
-      node.type = node.rhs.type;
+      node.type = node.lhs.type;
     }
   }
 

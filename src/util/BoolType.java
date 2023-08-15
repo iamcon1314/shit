@@ -2,8 +2,8 @@ package src.util;
 
 import src.ast.othernode.Type;
 
-import static src.util.SomethingExisting.Bool;
-import static src.util.SomethingExisting.Int;
+import static src.util.SomethingExisting.BoolOPr;
+import static src.util.SomethingExisting.IntOPr;
 
 public class BoolType {
     public String op;
@@ -13,7 +13,7 @@ public class BoolType {
         if(op.equals("&&")||
                 op.equals("||")
         ){
-            optype=Bool;
+            optype=BoolOPr;
         }
     }
 }
