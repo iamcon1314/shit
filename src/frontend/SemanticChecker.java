@@ -17,23 +17,23 @@ public class SemanticChecker implements ASTVisitor, SomethingExisting {
   private Scope nowScope;
   private int level = 0;
   public  int depth=0;
- public HashMap<String, Integer>ClassBuilt=new HashMap<>();
+  public HashMap<String, Integer>ClassBuilt=new HashMap<>();
 
- public boolean LeftInt(ExprNode expression){
-   if ((expression.isLeftValue() && expression.type.equals(IntOPr))) {
+  public boolean LeftInt(ExprNode expression){
+    if ((expression.isLeftValue() && expression.type.equals(IntOPr))) {
 //     throw new BaseError(expression.pos, "Left Value SHIT AWAAAAA！！！！！！！FUCK");
-     return false;
-   }
-   return true;
- }
- public boolean ifBuiltMuity(String name){
-   if(ClassBuilt.containsKey(name)) {
-     return true;
-   }
-   else{
-     return false;
-   }
- }
+      return false;
+    }
+    return true;
+  }
+  public boolean ifBuiltMuity(String name){
+    if(ClassBuilt.containsKey(name)) {
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
   public SemanticChecker(GlobalScope globalScope) {
     this.globalScope = globalScope;
     nowScope = globalScope;
@@ -133,7 +133,7 @@ public class SemanticChecker implements ASTVisitor, SomethingExisting {
 //        throw new BaseError(node.classBuild.pos, node.name+"Class Name Does Not Match Its CONSTURCT FUCKYOU!!!!!!!!!");
 //      }
 //    }
-        if (node.classBuild != null) {
+    if (node.classBuild != null) {
       if (node.name.equals(node.classBuild.name)) {
         node.classBuild.accept(this);
       }
@@ -208,7 +208,7 @@ public class SemanticChecker implements ASTVisitor, SomethingExisting {
   public void visit(SuiteNode node) {
     nowScope = new Scope(nowScope);
 //    try {
-      node.stmtnodes.forEach(stmt -> stmt.accept(this));
+    node.stmtnodes.forEach(stmt -> stmt.accept(this));
 
     nowScope = nowScope.parentScope;
   }
@@ -250,7 +250,7 @@ public class SemanticChecker implements ASTVisitor, SomethingExisting {
   public void visit(ForStmtNode node) {
     nowScope = new Scope(nowScope);
     nowScope.inLoop=true
-            ;
+    ;
     if (node.varDef != null) {
       node.varDef.accept(this);
     }
@@ -296,7 +296,7 @@ public class SemanticChecker implements ASTVisitor, SomethingExisting {
           node.value.accept(this);
           if (AutoOPr.equals(tmpSCOPE.returnType)) {
 
-              tmpSCOPE.returnType = node.value.type;
+            tmpSCOPE.returnType = node.value.type;
 
           } else if (!tmpSCOPE.returnType.equals(node.value.type)
                   && (!tmpSCOPE.returnType.isReferenceType() || !NullOPr.equals(node.value.type))) {
@@ -400,7 +400,7 @@ public class SemanticChecker implements ASTVisitor, SomethingExisting {
 //    }
 //  }
 
-//  *************
+  //  *************
   public void visit(BinaryExprNode node) {
     node.lhs.accept(this);
     node.rhs.accept(this);
@@ -555,7 +555,7 @@ public class SemanticChecker implements ASTVisitor, SomethingExisting {
   }
 
 
-//public void visit(PreAddExprNode node) {
+  //public void visit(PreAddExprNode node) {
 //    validateExpression(node.expr);
 //
 //    setTypeAndCheckLeftValue(node);
@@ -719,7 +719,7 @@ public class SemanticChecker implements ASTVisitor, SomethingExisting {
 //  }
 //}
 
-//  public void visit(NewExprNode node) {
+  //  public void visit(NewExprNode node) {
 //    for (var size : node.sizeList) {
 //      size.accept(this);
 //      if ( !size.type.equals(Int)) {
@@ -753,8 +753,8 @@ public class SemanticChecker implements ASTVisitor, SomethingExisting {
     if (!BoolOPr.equals(node.cond.type))
       throw new BaseError(node.pos, "SHIT !!!!In132131231313213123valid Condition expression");
     if (!node.lhs.type.equals(node.rhs.type)){//type不一样
-      if(!VoidOPr.equals(node.lhs.type) && !VoidOPr.equals(node.rhs.type)){
-        throw new BaseError(node.pos, "Invalid Expression SHIT13123!!!!!!!!!!!");
+      if(!NullOPr.equals(node.lhs.type) && !NullOPr.equals(node.rhs.type)){
+        throw new BaseError(node.pos, "Invalid Expression SHIT!!!!!!!!!!!");
       }
       else{
         if(NullOPr.equals(node.lhs.type)){
