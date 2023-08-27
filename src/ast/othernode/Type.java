@@ -62,4 +62,7 @@ public class Type {
             return false;
         return true;
     }
+    public boolean isArrayType() {
+        return dimension > 0;
+    }
 };

@@ -1,5 +1,6 @@
 package src.ast.stmtnode;
 
+import src.MXIR.IRBasicBlock;
 import src.ast.*;
 import src.ast.ExprNode;
 import src.ast.StmtNode;
@@ -8,10 +9,10 @@ import src.util.*;
 
 import java.util.ArrayList;
 
-public class ForStmtNode extends StmtNode {
+public class ForStmtNode extends LoopStmtNode {
   public VarDefNode varDef;
-  public ExprNode init, condition, step;
-  public ArrayList<StmtNode> stmtnodes = new ArrayList<StmtNode>();
+  public ExprNode init, step;
+  public IRBasicBlock stepBlock;
 
   public Node getVarDefNode(){
     if(varDef!=null){

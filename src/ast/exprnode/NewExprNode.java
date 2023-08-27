@@ -1,5 +1,6 @@
 package src.ast.exprnode;
 
+import src.MXIR.entity.IREntity;
 import src.ast.*;
 import src.util.*;
 //package src.frontend;
@@ -12,6 +13,7 @@ import src.ast.othernode.Type;
 public class NewExprNode extends ExprNode {
   public String typeName;
   public int dimension = 0;
+  public IREntity arraySize;
   public ArrayList<ExprNode> sizeList = new ArrayList<ExprNode>();
   public NewExprNode(Position pos, String typeName) {
     super(pos);

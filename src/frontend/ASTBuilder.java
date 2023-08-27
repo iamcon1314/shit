@@ -262,10 +262,10 @@ public class ASTBuilder extends MxParserBaseVisitor<Node> {
     //for后面的{}
 
     if (ctx.statement().suite() != null) {
-      forStmt.stmtnodes = ((SuiteNode) visit(ctx.statement().suite())).stmtnodes;
+      forStmt.stmts = ((SuiteNode) visit(ctx.statement().suite())).stmtnodes;
     }
     else {
-      forStmt.stmtnodes.add((StmtNode) visit(ctx.statement()));
+      forStmt.stmts.add((StmtNode) visit(ctx.statement()));
     }
     return forStmt;
   }

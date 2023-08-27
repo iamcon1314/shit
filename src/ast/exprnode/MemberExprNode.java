@@ -1,4 +1,5 @@
 package src.ast.exprnode;
+import src.MXIR.entity.IRRegister;
 import src.ast.othernode.Type;
 import src.ast.*;
 import src.util.*;
@@ -9,10 +10,10 @@ import src.util.*;
 
 
 //import javax.swing.text.Position;
-public class MemberExprNode extends ExprNode implements SomethingExisting {
+public class MemberExprNode extends ExprNode {
   public ExprNode obj;
   public String member;
-
+  public IRRegister objAddr;
   public MemberExprNode(Position pos, ExprNode obj, String member) {
     super(pos);
     this.obj = obj;

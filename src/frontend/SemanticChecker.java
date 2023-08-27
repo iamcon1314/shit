@@ -1,5 +1,6 @@
 package src.frontend;
 
+import shityourdick.for_debug;
 import src.Scope.GlobalScope;
 import src.Scope.Scope;
 import src.myerror.BaseError;
@@ -40,6 +41,7 @@ public class SemanticChecker implements ASTVisitor, SomethingExisting {
   }
 
   public boolean ifmainexist(){
+    for_debug t = new for_debug();t.debug1();
     if(globalScope.getFuncDef("main")==null){
       return false;
     }
@@ -63,6 +65,7 @@ public class SemanticChecker implements ASTVisitor, SomethingExisting {
       var def = node.defList.get(i);
       def.accept(this);
     }
+    for_debug t = new for_debug();t.debug1();
   }
 
 //  public void visit(ProgramNode node) {
@@ -266,7 +269,7 @@ public class SemanticChecker implements ASTVisitor, SomethingExisting {
     if (node.step != null) {
       node.step.accept(this);
     }
-    node.stmtnodes.forEach(stmt -> stmt.accept(this));
+    node.stmts.forEach(stmt -> stmt.accept(this));
     nowScope = nowScope.parentScope;
   }
 
@@ -633,8 +636,7 @@ public class SemanticChecker implements ASTVisitor, SomethingExisting {
     if (node.array.type == null) {
       throw new BaseError(node.pos, "YOUR TYPE EROOR!!!!!!!!!!!!!!!!!");
     }
-    node.type = new Type(node.array.type);
-    node.type.dimension=node.type.dimension-1;
+    node.type = new Type(node.array.type.typeName, node.array.type.dimension - 1);
     if (node.type.dimension < 0) {
       throw new BaseError(node.pos, "YOUR DIMENSION EROOR!!!!!!!!!!!!!!!!!");
     }

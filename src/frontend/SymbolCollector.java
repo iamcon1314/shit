@@ -64,6 +64,7 @@ public class SymbolCollector implements ASTVisitor {
       if (node.funcMember.containsKey(func.name)) {
         throw new BaseError(func.pos, "FuckYOU!!! Function " + func.name + " is already defined in Class"+node.name);
       }
+      func.className = node.name;
       // 将函数添加到类的成员函数表中
       node.funcMember.put(func.name, func);
     }
