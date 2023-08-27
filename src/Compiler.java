@@ -51,7 +51,7 @@ public class Compiler {
         public static void main(String[] args) throws Exception {
 
 //        try {
-            CharStream input = CharStreams.fromStream(new FileInputStream("1.cpp"));
+//            CharStream input = CharStreams.fromStream(new FileInputStream("1.cpp"));
 //                CharStream input = CharStreams.fromStream(System.in);
 //
                 MxLexer lexer = new MxLexer(input);
