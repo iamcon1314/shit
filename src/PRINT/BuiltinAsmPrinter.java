@@ -1,11 +1,13 @@
-package src.util;
+package src.PRINT;
+
+//package utils;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
 
 
 public class BuiltinAsmPrinter {
-  String builtin_s_code = """
+    String builtin_s_code = """
 	.file	"builtin.c"
 	.option nopic
 	.attribute arch, "rv32i2p0_m2p0_a2p0_f2p0_d2p0_c2p0"
@@ -291,9 +293,9 @@ __mx_strneq:
 	.ident	"GCC: (g2ee5e430018) 12.2.0"
 	.section	.note.GNU-stack,"",@progbits	
 """;
-  public BuiltinAsmPrinter(String fileName) throws IOException {
-    FileOutputStream out = new FileOutputStream(fileName);
-    out.write(builtin_s_code.getBytes());
-    out.close();
-  }
+    public BuiltinAsmPrinter(String fileName) throws IOException {
+        FileOutputStream out = new FileOutputStream(fileName);
+        out.write(builtin_s_code.getBytes());
+        out.close();
+    }
 }
