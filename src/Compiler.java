@@ -1,38 +1,27 @@
 package src;
 
+import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.CharStreams;
+import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.tree.ParseTree;
+import src.ASM.assembly.ASMModule;
 import src.ASM.backend.InstSelector;
 import src.ASM.backend.RegAllocator;
 import src.Builder.IRBuilder;
+import src.MXIR.IRProgram;
 import src.Scope.GlobalScope;
 import src.ast.othernode.ProgramNode;
-import src.grammar.*;
+import src.frontend.ASTBuilder;
+import src.frontend.SemanticChecker;
+import src.frontend.SymbolCollector;
+import src.grammar.MxLexer;
+import src.grammar.MxParser;
 import src.myerror.MxErrorListener;
-import src.util.*;
-import src.ast.*;
 
-import java.io.*;
-
-import org.antlr.v4.runtime.*;
-import org.antlr.v4.runtime.tree.*;
-
-import src.MXIR.*;
-import src.ASM.assembly.*;
-import src.frontend.*;
-//import middleend.*;
-//import src.backend.*;
-
-//import antlr.*;
-//import assembly.ASMModule;
-//import Utils.*;
-//import AST.*;
-//import IR.IRprogram;
-//
-//import java.io.BufferedWriter;
-//import java.io.FileInputStream;
-//import java.io.FileWriter;
-//import java.io.IOException;
-//
-//import org.antlr.v4.runtime.*;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 //import org.antlr.v4.runtime.tree.*;
 //
 //import front.*;
@@ -51,9 +40,8 @@ public class Compiler {
         public static void main(String[] args) throws Exception {
 
 //        try {
-//            CharStream input = CharStreams.fromStream(new FileInputStream("1.cpp"));
+            CharStream input = CharStreams.fromStream(new FileInputStream("1.cpp"));
 //                CharStream input = CharStreams.fromStream(System.in);
-//
                 MxLexer lexer = new MxLexer(input);
                 lexer.removeErrorListeners();
                 lexer.addErrorListener(new MxErrorListener());

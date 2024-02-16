@@ -13,4 +13,3 @@ public abstract class IRInst {
 
   public abstract void accept(IRVisitor visitor);
 }
-

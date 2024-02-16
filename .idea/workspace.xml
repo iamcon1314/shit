@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c2b24c59-882a-4c06-adca-6e294f77827e" name="更改" comment="" />
+    <list default="true" id="c2b24c59-882a-4c06-adca-6e294f77827e" name="更改" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/1.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Compiler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Compiler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MXIR/IRFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MXIR/IRFunction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MXIR/inst/IRInst.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MXIR/inst/IRInst.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/ASTBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/ASTBuilder.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,14 +43,17 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_directory_selection&quot;: &quot;C:/Users/陆鹏睿/Documents/GitHub/shitdick/shityourdick&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/陆鹏睿/Documents/GitHub/shitdick&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/lupen/Documents/GitHub/shit/1.cpp&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.appearance&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;,
+    &quot;应用程序.Compiler.executor&quot;: &quot;Run&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -84,6 +95,13 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-17.0.10-corretto-17.0.10-4caba194b151-5cd809f4" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="默认任务">
@@ -97,10 +115,41 @@
       <workItem from="1693133525580" duration="950000" />
       <workItem from="1693143427635" duration="1473000" />
       <workItem from="1693146211826" duration="292000" />
+      <workItem from="1707194948828" duration="54000" />
+      <workItem from="1707195009082" duration="140000" />
+      <workItem from="1707195156131" duration="3702000" />
+      <workItem from="1707363093098" duration="2475000" />
+      <workItem from="1707382112736" duration="18000" />
+      <workItem from="1707382148004" duration="2045000" />
+      <workItem from="1707980872029" duration="305000" />
+      <workItem from="1707981329183" duration="2482000" />
+      <workItem from="1707986330727" duration="1853000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Compiler.java</url>
+          <line>53</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

@@ -35,9 +35,7 @@ public class ASTBuilder extends MxParserBaseVisitor<Node> {
       return funcDef;
     }
     else{
-
       funcDef.params = (ParameterListNode) visit(ctx.parameterList());
-
       funcDef.stmtnodes = ((SuiteNode) visit(ctx.suite())).stmtnodes;
       return funcDef;
     }
